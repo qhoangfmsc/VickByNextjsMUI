@@ -6,7 +6,7 @@ import { dataDisplayCustomizations } from './customizations/dataDisplay.tsx';
 import { feedbackCustomizations } from './customizations/feedback.tsx';
 import { navigationCustomizations } from './customizations/navigation.tsx';
 import { surfacesCustomizations } from './customizations/surfaces.ts';
-import { colorSchemes, typography, shadows, shape } from './themePrimitives';
+import { colorSchemes, typography, shadows, shape } from './themePrimitives.ts';
 
 interface AppThemeProps {
   children: React.ReactNode;

@@ -13,8 +13,10 @@ import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import ForgotPassword from "./ForgotPassword.tsx";
-import AppTheme from "@/app/shared-theme/AppTheme.tsx";
-import ColorModeSelect from "@/app/shared-theme/ColorModeSelect.tsx";
+import AppTheme from "@/app/components/shared-theme/AppTheme.tsx";
+import ColorModeSelect from "@/app/components/shared-theme/ColorModeSelect.tsx";
+import login from "@/app/api/login.tsx";
+import { loginSuccess } from "@/app/lib/sessionlib.ts";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -70,38 +72,14 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const param = {
-      username: data.get("phone"),
-      password: data.get("password"),
-    };
-
-    login(param);
-  };
-
-  const login = async (param: Object) => {
-    const url = 'https://stalkuat.hanzo.finance/login';
-    const data = param;
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      console.log(result);
-    } catch (error) {
-      console.error('Error:', error);
+    const username: string = data.get("phone") as string;
+    const password: string = data.get("password") as string;
+    const response = await login(username, password);
+    if (response) {
+      loginSuccess();
     }
   };
 
@@ -218,7 +196,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               Chưa có tài khoản?{" "}
               <span>
                 <Link
-                  href="/material-ui/getting-started/templates/sign-in/"
+                  href="/"
                   variant="body2"
                   sx={{ alignSelf: "center" }}
                 >
