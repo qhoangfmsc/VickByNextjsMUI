@@ -4,9 +4,8 @@ import type { ThemeOptions } from '@mui/material/styles';
 import { inputsCustomizations } from './customizations/inputs.tsx';
 import { dataDisplayCustomizations } from './customizations/dataDisplay.tsx';
 import { feedbackCustomizations } from './customizations/feedback.tsx';
-import { navigationCustomizations } from './customizations/navigation.tsx';
 import { surfacesCustomizations } from './customizations/surfaces.ts';
-import { colorSchemes, typography, shadows, shape } from './themePrimitives.ts';
+import { colorSchemes, typography, shape } from './themePrimitives.ts';
 
 interface AppThemeProps {
   children: React.ReactNode;
@@ -33,13 +32,11 @@ export default function AppTheme({
           },
           colorSchemes, // Recently added in v6 for building light & dark mode app, see https://mui.com/material-ui/customization/palette/#color-schemes
           typography,
-          shadows,
           shape,
           components: {
             ...inputsCustomizations,
             ...dataDisplayCustomizations,
             ...feedbackCustomizations,
-            ...navigationCustomizations,
             ...surfacesCustomizations,
             ...themeComponents,
           },

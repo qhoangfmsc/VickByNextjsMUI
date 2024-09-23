@@ -1,5 +1,5 @@
 'use server'
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
@@ -24,7 +24,7 @@ export async function updateSession(request: NextRequest) {
     if (!session) return;
 
     const res = NextResponse.next();
-    let r = (Math.random() + 1).toString(36).substring(7);
+    const r = (Math.random() + 1).toString(36).substring(7);
     res.cookies.set({
         name: "session",
         value: r,
@@ -35,8 +35,9 @@ export async function updateSession(request: NextRequest) {
 }
 
 export async function loginSuccess() {
-    revalidatePath("/pages/system/user")
-    redirect("/pages/system/user")
+    console.log("login success");
+    // revalidatePath("/pages/system/user")
+    // redirect("/pages/system/user")
 }
 
 export async function redirectPage(url: string, type?: RedirectType) {

@@ -5,6 +5,7 @@ declare module '@mui/material/Paper' {
     highlighted: true;
   }
 }
+
 declare module '@mui/material/styles/createPalette' {
   interface ColorRange {
     50: string;
@@ -19,7 +20,11 @@ declare module '@mui/material/styles/createPalette' {
     900: string;
   }
 
-  interface PaletteColor extends ColorRange {}
+  // You can either use this or directly use ColorRange in palette definitions
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface PaletteColor extends ColorRange {
+    50: string;
+  }
 
   interface Palette {
     baseShadow: string;
@@ -212,27 +217,6 @@ export const getDesignTokens = (mode: PaletteMode) => {
         fontSize: defaultTheme.typography.pxToRem(18),
         fontWeight: 600,
       },
-      subtitle1: {
-        fontSize: defaultTheme.typography.pxToRem(18),
-      },
-      subtitle2: {
-        fontSize: defaultTheme.typography.pxToRem(14),
-        fontWeight: 500,
-      },
-      body1: {
-        fontSize: defaultTheme.typography.pxToRem(14),
-      },
-      body2: {
-        fontSize: defaultTheme.typography.pxToRem(14),
-        fontWeight: 400,
-      },
-      caption: {
-        fontSize: defaultTheme.typography.pxToRem(12),
-        fontWeight: 400,
-      },
-    },
-    shape: {
-      borderRadius: 8,
     },
     shadows: customShadows,
   };
@@ -393,7 +377,3 @@ export const typography = {
 export const shape = {
   borderRadius: 8,
 };
-
-// @ts-ignore
-const defaultShadows: Shadows = ['var(--mui-palette-baseShadow)', ...defaultTheme.shadows.slice(1)];
-export const shadows = defaultShadows;

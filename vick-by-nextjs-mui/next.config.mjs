@@ -6,10 +6,6 @@ const nextConfig = {
                 source: '/login',
                 destination: `${process.env.API_DOMAIN}/login`,
             },
-            {
-                source: '/logout',
-                destination: `${process.env.API_DOMAIN}/logout`,
-            },
         ]
     }
 };
